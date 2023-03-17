@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Models\Topic;
+use Filament\Facades\Filament;
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    $topics = Topic::all();
+    return view('home', [
+        'resources' => Filament::getResources(),
+        'topics' => $topics,
+    ]);
+})->name('home')->middleware('RedirectIfNotAuthenticated');
