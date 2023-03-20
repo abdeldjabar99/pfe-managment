@@ -18,7 +18,7 @@
         <p class="inline-block text-gray-50-100   mr-2"><span class="font-bold">Project framed by :</span>{{ $topic->teacher->name }}</p>
     </div>
     <div class="px-6 py-2">
-        <a href="#" class="inline-block text-slate-100 rounded-full px-3 py-2 text-sm font-semibold bg-yellow-600 mr-2">Demand Topic</a>
+        <a href="{{route('demand',['id'=> $topic->id])}}" class="inline-block text-slate-100 rounded-full px-3 py-2 text-sm font-semibold bg-yellow-600 mr-2">Demand Topic</a>
     </div>
 </div>
 
