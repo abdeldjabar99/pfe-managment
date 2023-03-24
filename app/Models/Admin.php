@@ -16,7 +16,7 @@ class Admin extends User
     {
         parent::boot();
 
-        static::addGlobalScope('clients', function (Builder $builder) {
+        static::addGlobalScope('admin', function (Builder $builder) {
             $builder->where('role_id', Role::ADMIN);
         });
     }

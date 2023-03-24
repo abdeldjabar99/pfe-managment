@@ -14,7 +14,7 @@ class TopicPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->role_id===Role::ADMIN;
     }
 
     /**
@@ -22,7 +22,7 @@ class TopicPolicy
      */
     public function view(User $user, Topic $topic): bool
     {
-        return true;
+        return $user->role_id===Role::ADMIN;
     }
 
     /**
@@ -30,7 +30,7 @@ class TopicPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role_id===Role::ADMIN || $user->role_id===Role::TEACHER;
+        return $user->role_id===Role::ADMIN ;
     }
 
     /**
@@ -38,7 +38,7 @@ class TopicPolicy
      */
     public function update(User $user, Topic $topic): bool
     {
-        return $user->role_id===Role::ADMIN || $user->id===$topic->user_id;
+        return $user->role_id===Role::ADMIN ;
     }
 
     /**
@@ -46,7 +46,7 @@ class TopicPolicy
      */
     public function delete(User $user, Topic $topic): bool
     {
-        return $user->role_id===Role::ADMIN || $user->id===$topic->user_id;
+        return $user->role_id===Role::ADMIN ;
     }
 
     /**
@@ -54,7 +54,7 @@ class TopicPolicy
      */
     public function restore(User $user, Topic $topic): bool
     {
-        return $user->role_id===Role::ADMIN || $user->id===$topic->user_id;
+        return $user->role_id===Role::ADMIN ;
     }
 
     /**
@@ -62,6 +62,6 @@ class TopicPolicy
      */
     public function forceDelete(User $user, Topic $topic): bool
     {
-        return $user->role_id===Role::ADMIN || $user->id===$topic->user_id;
+        return $user->role_id===Role::ADMIN ;
     }
 }

@@ -18,7 +18,7 @@ class Teacher extends User
     {
         parent::boot();
 
-        static::addGlobalScope('clients', function (Builder $builder) {
+        static::addGlobalScope('teacher', function (Builder $builder) {
             $builder->where('role_id', Role::TEACHER);
         });
     }
