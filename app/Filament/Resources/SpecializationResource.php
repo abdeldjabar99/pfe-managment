@@ -2,12 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\StudentResource\Pages;
-use App\Filament\Resources\StudentResource\RelationManagers;
-use App\Models\Student;
+use App\Filament\Resources\SpecializationResource\Pages;
+use App\Filament\Resources\SpecializationResource\RelationManagers;
+use App\Models\Specialization;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -17,14 +16,13 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class StudentResource extends Resource
+class SpecializationResource extends Resource
 {
-    protected static ?string $model = Student::class;
+    protected static ?string $model = Specialization::class;
 
     protected static ?string $navigationIcon = 'phosphor-student-bold';
     protected static ?string $navigationGroup = 'User Mangment';
-
-
+    
     public static function form(Form $form): Form
     {
         return $form
@@ -33,17 +31,6 @@ class StudentResource extends Resource
                 ->schema([
                     TextInput::make('name')
                     ->required(),
-                    TextInput::make('email')
-                    ->email()
-                    ->unique(ignoreRecord: true)
-                    ->required(),
-                    TextInput::make('password')
-                    ->password()
-                    ->required(),
-                    Select::make('special_id')
-                    ->relationship('special', 'name')
-                    ->required(),
-
                 ]),
             ]);
     }
@@ -53,11 +40,7 @@ class StudentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('name')->searchable(),
-                TextColumn::make('email')->searchable(),
-                TextColumn::make('special.name')->searchable(),
-
-            ])
+                TextColumn::make('name')->searchable(),            ])
             ->filters([
                 //
             ])
@@ -79,9 +62,9 @@ class StudentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListStudents::route('/'),
-            'create' => Pages\CreateStudent::route('/create'),
-            'edit' => Pages\EditStudent::route('/{record}/edit'),
+            'index' => Pages\ListSpecializations::route('/'),
+            'create' => Pages\CreateSpecialization::route('/create'),
+            'edit' => Pages\EditSpecialization::route('/{record}/edit'),
         ];
     }    
 }

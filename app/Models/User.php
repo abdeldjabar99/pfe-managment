@@ -25,6 +25,7 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'password',
         'role_id',
+        'special_id',
     ];
 
     /**
@@ -49,6 +50,11 @@ class User extends Authenticatable implements FilamentUser
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function special(): BelongsTo
+    {
+        return $this->belongsTo(specialization::class);
     }
 
     public function isStudent()

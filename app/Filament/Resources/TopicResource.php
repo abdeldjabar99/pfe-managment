@@ -52,6 +52,9 @@ class TopicResource extends Resource
                     Select::make('user_id')
                     ->relationship('teacher', 'name')
                     ->required(),
+                    Select::make('special_id')
+                    ->relationship('special', 'name')
+                    ->required(),
                    
                 ]),
             ]);
@@ -64,9 +67,13 @@ class TopicResource extends Resource
                 TextColumn::make('id'),
                 TextColumn::make('title')->searchable(),
                 TextColumn::make('teacher.name')->searchable(),
-            ])
+                TextColumn::make('special.name')->searchable(),
+
+                ])
             ->filters([
-                SelectFilter::make('teacher')->relationship('teacher', 'name')
+                SelectFilter::make('teacher')->relationship('teacher', 'name'),
+                SelectFilter::make('special')->relationship('special', 'name')
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

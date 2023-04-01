@@ -19,7 +19,7 @@ use Filament\Facades\Filament;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    $topics = Topic::all();
+    $topics = Topic::where('special_id', auth()->user()->special_id)->get();
     return view('home', [
         'resources' => Filament::getResources(),
         'topics' => $topics,
