@@ -19,11 +19,23 @@ use Filament\Facades\Filament;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    $topics = Topic::where('special_id', auth()->user()->special_id)->get();
-    return view('home', [
-        'resources' => Filament::getResources(),
-        'topics' => $topics,
-    ]);
+    $choice=Choice::where('student_id',auth()->user()->id)
+    ->where('is_accpted',true)
+    ->first();
+    
+    if($choice){
+        return view('choice', [
+            'resources' => Filament::getResources(),
+            'topic' =>$choice->topic,
+        ]);
+    }else {
+        $topics = Topic::where('special_id', auth()->user()->special_id)->get();
+        return view('home', [
+            'resources' => Filament::getResources(),
+            'topics' => $topics,
+        ]);
+    }
+
 })->name('home')->middleware('RedirectIfNotAuthenticated');
 
 Route::get('/demand/{id}', function ($id) {
