@@ -62,7 +62,7 @@ Route::post('/choice', function (Request $request) {
     $choice->comment = $validatedData['comment'];
     $choice->save();
 
-    $topics = Topic::all();
+    $topics = Topic::where('special_id', auth()->user()->special_id)->get();;
     return view('home',['topics' => $topics]);
 })->name('choice.store')->middleware('RedirectIfNotAuthenticated');
 
