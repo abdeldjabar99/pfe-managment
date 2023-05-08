@@ -8,6 +8,7 @@ use App\Models\TeacherTopic;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -44,6 +45,9 @@ class TeacherTopicResource extends Resource
                     RichEditor::make('description')
                     ->required(),
                     TextInput::make('technology'),
+                    Select::make('special_id')
+                    ->relationship('special', 'name')
+                    ->required(),
 
                    
                 ]),
