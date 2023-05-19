@@ -58,6 +58,7 @@ class TeacherChoiceResource extends Resource
                 TextColumn::make('teacher.name')->searchable(),
                 TextColumn::make('student.name')->searchable()
                 ->searchable(),
+                TextColumn::make('created_at')->label('date choice'),
                 ToggleColumn::make('is_accpted'),
             ])
             ->filters([
