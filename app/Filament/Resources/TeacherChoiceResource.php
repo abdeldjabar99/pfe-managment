@@ -18,6 +18,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\IconColumn;
+
 
 class TeacherChoiceResource extends Resource
 {
@@ -58,6 +60,8 @@ class TeacherChoiceResource extends Resource
                 TextColumn::make('teacher.name')->searchable(),
                 TextColumn::make('student.name')->searchable()
                 ->searchable(),
+                IconColumn::make('is_binome')
+                ->boolean(),
                 TextColumn::make('created_at')->label('date choice'),
                 ToggleColumn::make('is_accpted'),
             ])

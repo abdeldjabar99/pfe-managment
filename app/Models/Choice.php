@@ -16,6 +16,9 @@ class Choice extends Model
         'topic_id',
         'comment',
         'is_accpted',
+        'is_binome',
+        'binome_id',
+
     ];
 
     public function student(): BelongsTo
@@ -27,6 +30,12 @@ class Choice extends Model
     {
         return $this->belongsTo(Teacher::class);
     }
+
+    public function binome(): BelongsTo
+    {
+        return $this->belongsTo(Student::class) ? $this->belongsTo(Student::class) :'not have binome';
+    }
+
 
     public function topic(): BelongsTo
     {

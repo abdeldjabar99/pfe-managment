@@ -26,7 +26,17 @@
         <input type="hidden"  name="teacher_id" value="{{$topic->teacher->id}}" id="teacher_id"  required>
         <input disabled type="text" name="teacher" value="{{$topic->teacher->name}}" id="teacher" class="border-yellow-600 border-2 p-2 rounded-md w-full" required>
     </div>
-
+    <div>
+        <input type="checkbox" name="is_binome" value="0" id="is_binome"> your have binome
+    </div>
+    <div id="binome_id_div" style="display: none;">
+     <label for="binome_id">your Binome:</label>
+    <select name="binome_id"  class="border-yellow-600 border-2 p-2 rounded-md w-full">
+        @foreach ($students as $user)
+            <option value="{{ $user->id }}">{{ $user->name }}</option>
+        @endforeach
+    </select>
+    </div>
     <div>
         <label for="comment">Comment:</label>
         <textarea name="comment" id="comment" class="border-yellow-600 border-2 p-2 rounded-md w-full"></textarea>
@@ -37,4 +47,23 @@
     </div>
 </form>
 
+<script>
+    const showSelectCheckbox = document.getElementById('is_binome');
+    const userSelect = document.getElementById('binome_id_div');
+
+    showSelectCheckbox.addEventListener('change', function() {
+        userSelect.style.display = this.checked ? 'block' : 'none';
+    });
+
+     // Submit the form with a value of 'false' for 'is_binome' when it is not checked
+     document.querySelector('form').addEventListener('submit', function() {
+        if (!showSelectCheckbox.checked) {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'is_binome');
+            hiddenInput.setAttribute('value', 'off');
+            this.appendChild(hiddenInput);
+        }
+    });
+</script>
 @endsection
